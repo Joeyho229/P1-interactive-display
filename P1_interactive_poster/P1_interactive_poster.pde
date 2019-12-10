@@ -1,20 +1,25 @@
 // P1 project, interactive poster
 
-PImage backgroundImage;
+PImage backgroundImage, frontgroundImage;
 
-int backgroundColour;
-int screenY;
-int TopLimit = 2790;
+int backgroundColour, screenY;
+int TopLimit = 3600;
 int BottomLimit = 0;
-int YstartingValue = -2801;
+int YstartingValue = -4248;
+
+boolean showImage = true;
 
 void setup() {
-  size(555, 1080);
-  backgroundImage = loadImage("123456.png");
+  size(1920, 1080);
+  backgroundImage = loadImage("P1CityTest.png");
+  frontgroundImage = loadImage("FrontPage5G.jpg");
 }
 
 void draw() {
   image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
+  if (showImage) {    // If condition set for the frontpage
+    image(frontgroundImage, 0, 0);
+  }
 }
 
 void mouseWheel(MouseEvent event) {
@@ -24,7 +29,11 @@ void mouseWheel(MouseEvent event) {
 
   if (screenY < 0) {    // Stating the boundaries for minimum scrolling point
     screenY = BottomLimit;
-  } else if (screenY > 2790) {    // Stating the boundaries for maximum scrolling point
+  } else if (screenY > 3600) {    // Stating the boundaries for maximum scrolling point
     screenY = TopLimit;
   }
+}
+
+void mouseClicked() {
+  showImage = false;    // Condition for the frontpage to dissapear
 }

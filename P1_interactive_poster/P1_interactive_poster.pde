@@ -30,6 +30,8 @@ void draw() {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
 
+  println(mouseX, mouseY);
+
   if (textHasBeenClicked) {
     //display text 2 - New information box
     fill(0);
@@ -40,6 +42,12 @@ void draw() {
     //textSize(32);
     text(words, width/2+100, height/2+20+screenY);
   }
+
+  text(words, 407, 259 + screenY);    // ingenting
+  
+  text(words, 800, 285 + screenY);    // Der skal stå ting ved parabolen om IoT
+  
+  text(words, 660, 301 + screenY);    // Ting ved satelitten
 
   //text about 5G concerns
 
@@ -67,8 +75,8 @@ void mouseClicked() {
   showImage = false;    // Condition for the frontpage to dissapear
 }
 
-void mousePressed () { if (mouseX > width/2+100 && mouseX < width/2+100 + 200 &&
-      mouseY > height/2-500 && mouseY <height/2+500)
-  textHasBeenClicked = ! textHasBeenClicked;
-
+void mousePressed () { 
+  if (mouseX > width/2+100 && mouseX < width/2+100 + 200 &&
+    mouseY > height/2-500 && mouseY <height/2+500)
+    textHasBeenClicked = ! textHasBeenClicked;
 }

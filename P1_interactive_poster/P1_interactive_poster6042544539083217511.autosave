@@ -1,0 +1,85 @@
+// P1 project, interactive poster
+
+// text
+String words = "Læs mere...";
+String str25G = "Hurtigere Internet - Omkring 65 gange hurtigere end det du oplever med 4G. Utrolig Lav Latenstid - Tiden det tager for 2 enheder at kommunikere med hinanden. - 5G latensen kan nå helt ned på 1 millisekund fremfor 70 millisekunder med 4G. Forøget Stråling Fra Nye 5G Antenner - Strålingsniveauet forbliver langt under grænseværdien. Gavner al Digital Kommunikation - Vil gavne selvkørende biler, sensorer, VR osv.";
+String str3IoT = "With the Internet of Thing more than billions of devices and physical objects will be connected in an online world. This will quickly make the world smart and people's lives even easier";
+String str45Gcon = " Hurtigere Internet - Omkring 65 gange hurtigere end det du oplever med 4G. Utrolig lav latenstid - Tiden det tager for 2 enheder at kommunkere med hinanden";
+String str55Gcontitle = "BEKYMRINGER OMKRING 5G";
+
+
+/*
+Hurtigere internet - Omkring 65 gange hurtigere end det du oplever med 4G.
+Utrolig vav latense - Tiden det tager for 2 enheder at kommunikere med hinanden. 
+Med 5G latensen kan nå helt ned på 1 millisekund fremfor 70 millisekunder med 4G.
+Forøget stråling fra nye 5G antenner - Strålingsniveauet forblive langt under grænseværdien.
+Gavner al digital kommunikation - Vil gavne selvkørende biler, sensorer, VR osv.  
+*/
+
+PImage backgroundImage, frontgroundImage;
+
+int backgroundColour, screenY;
+int TopLimit = 3600;
+int BottomLimit = 0;
+int YstartingValue = -4248;
+
+boolean showImage = true;
+boolean hitbox = true;
+boolean textHasBeenClicked = false;
+
+void setup() {
+  size(1920, 1080);
+  backgroundImage = loadImage("P1CityTest.png");
+  frontgroundImage = loadImage("FrontPage5G.jpg");
+}
+
+void draw() {  
+  if (showImage == true) {    // If condition set for the frontpage
+    image(frontgroundImage, 0, 0);
+  } else if (showImage == false) {
+    image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
+  }
+
+  if (textHasBeenClicked) {
+    //display text 2 - New information box
+    fill(0);
+    text (str25G, width/2+100, height/2+20+screenY);
+  } else {
+    //display text 1 - Old box
+    fill(0);
+    //textSize(32);
+    text(words, width/2+100, height/2+20+screenY);
+  }
+
+  //text about 5G concerns
+
+  //fill(255,0,0);
+  //textSize(32);
+    text(str25G, width/2, height/2+20+screenY, 450, height/2+40+screenY);
+  text(str45Gcon, width/2+250, height-2800+screenY, 300, height-2600+screenY);
+}
+
+void mouseWheel(MouseEvent event) {
+  if (showImage == true) {
+  } else if (showImage == false) {
+    float e = event.getCount();
+    screenY = screenY + int(e) * 18;    // Defining the value screenY with the event.getCount(), additionally it also increases the scroll speed
+    println(screenY);
+  }
+
+  if (screenY < 0) {    // Stating the boundaries for minimum scrolling point
+    screenY = BottomLimit;
+  } else if (screenY > 3600) {    // Stating the boundaries for maximum scrolling point
+    screenY = TopLimit;
+  }
+}
+
+void mouseClicked() {  
+  showImage = false;    // Condition for the frontpage to dissapear
+}
+
+void mousePressed () { if (mouseX > width/2+100 && mouseX < width/2+100 + 200 &&
+      mouseY > height/2-500 && mouseY <height/2+500)
+  textHasBeenClicked = ! textHasBeenClicked;
+
+}

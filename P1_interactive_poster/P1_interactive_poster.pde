@@ -48,17 +48,15 @@ void draw() {
     float y = r * sin(theta);
 
     noStroke();
-    fill(0);
-    ellipse(x + width/2.221, y + height/2.02, 50, 50);
+    fill(#FFFFFF, 120);
+    ellipse(x + width/2.221, y + height/2.02, 25, 25);
 
-    theta += 0.01;
+    theta += 0.04;
 
     image(finger, 0, 0);    // Overlay finger
   } else if (frontPage == false) {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
-
-
 
   println(mouseX, mouseY);
 

@@ -24,10 +24,8 @@ int TopLimit = 4014;
 int BottomLimit = 0;
 int YstartingValue = -4248;    // The Y-coordinate where to load the 2nd page
 
-boolean showImage = true;
-boolean hitbox = true;
 boolean textHasBeenClicked = false;
-boolean showText = false;
+boolean frontPage = true;
 
 
 void setup() {
@@ -38,17 +36,19 @@ void setup() {
 
 
 void draw() {  
-  if (showImage == true) {    // If condition set for the frontpage
+  if (frontPage == true) {    // If condition set for the frontpage
     image(frontgroundImage, 0, 0);
-  } else if (showImage == false) {
+  } else if (frontPage == false) {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
+  
 
-  //println(mouseX, mouseY);
+  
+  println(mouseX , mouseY);
 
-  if (showText == true) {    // Condition for the text to appear when showText == true
+  if (frontPage == false) {    // Condition for the text to appear when showText == true
     textSize(20);
-    fill(0); 
+    fill(#000000); 
     text(TitleConcerns, width/2+320, height-2895 +screenY);    // Title for 5G concerns
     text(TextForConcerns, width/2+250, height-2875+screenY, 350, height-2600+screenY);    // Text for 5G Concerns
 
@@ -61,7 +61,7 @@ void draw() {
     text(Title5G, width/2+100, height-500+screenY); //5G title pos
     text(TextFor5G, width/2+100, height-500+screenY, 400, height-300+screenY);    // Text for 5G and position
 
-    fill(255);
+    fill(#FFFFFF);
     text(TitleConclusion, width/2-200, height-4820+screenY); //5G concern
     text(TextForConclusion, width/2-200, height-4800+screenY, 400, height-4400+screenY); // Text for conclusion and position
 
@@ -80,8 +80,8 @@ void draw() {
 
 
 void mouseWheel(MouseEvent event) {
-  if (showImage == true) {
-  } else if (showImage == false) {
+  if (frontPage == true) {
+  } else if (frontPage == false) {
     float e = event.getCount();
     screenY = screenY + int(e) * 18;    // Defining the value screenY with the event.getCount(), additionally it also increases the scroll speed
     println(screenY);
@@ -96,9 +96,7 @@ void mouseWheel(MouseEvent event) {
 
 
 void mouseClicked() {  
-  showImage = false;    // Condition for the frontpage to dissapear
-  showText = true;    // Condition for text to appear when moving to second page
-  if (mouseX > width/2+100 && mouseX < width/2+100 + 200 &&
-    mouseY > height/2-500 && mouseY <height/2+500)
+  frontPage = false;
+  if (mouseX > width/2+100 && mouseX < width/2+100 + 200 && mouseY > height/2-500 && mouseY <height/2+500)
     textHasBeenClicked = ! textHasBeenClicked;
 }

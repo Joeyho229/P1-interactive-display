@@ -17,34 +17,50 @@ String TitleRadiation = "Radioaktiv Stråling";
 String TitleConclusion = "Opsumering om 5G"; 
 
 // Images
-PImage backgroundImage, frontgroundImage;
+PImage backgroundImage, frontPageImage, finger;
 
 int backgroundColour, screenY;
 int TopLimit = 4014;
 int BottomLimit = 0;
 int YstartingValue = -4248;    // The Y-coordinate where to load the 2nd page
+int passedTime;
 
 boolean textHasBeenClicked = false;
 boolean frontPage = true;
+boolean on;
 
+float r = 320;
+float theta = 0;
 
 void setup() {
   size(1920, 1080);
   backgroundImage = loadImage("P1CityV3.png");
-  frontgroundImage = loadImage("P1FrontPage.png");
+  frontPageImage = loadImage("P1FrontPage.png");
+  finger = loadImage("P1FrontPageFinger.png");
 }
 
 
 void draw() {  
   if (frontPage == true) {    // If condition set for the frontpage
-    image(frontgroundImage, 0, 0);
+    image(frontPageImage, 0, 0);    // Frontpage image
+
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+
+    noStroke();
+    fill(0);
+    ellipse(x + width/2.221, y + height/2.02, 50, 50);
+
+    theta += 0.01;
+
+    image(finger, 0, 0);    // Overlay finger
   } else if (frontPage == false) {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
-  
 
-  
-  println(mouseX , mouseY);
+
+
+  println(mouseX, mouseY);
 
   if (frontPage == false) {    // Condition for the text to appear when showText == true
     textSize(20);
@@ -97,6 +113,7 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked() {  
   frontPage = false;
+
   if (mouseX > width/2+100 && mouseX < width/2+100 + 200 && mouseY > height/2-500 && mouseY <height/2+500)
     textHasBeenClicked = ! textHasBeenClicked;
 }

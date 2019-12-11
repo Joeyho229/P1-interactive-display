@@ -1,85 +1,103 @@
 // P1 project, interactive poster
 
-// text
-String words = "Læs mere...";
-String str2 = "5G er godt og det vil bidrage...";
-String str35G = "Hurtigere Internet - Omkring 65 gange hurtigere end det du oplever med 4G. Utrolig Lav Latenstid - Tiden tager det tager for 2 enheder at kommunikere med hinanden - Med 5G latensen kan det nå helt ned på 1 millisekund fremfor 70 millisekunder med 4G.";
-String str3IoT = "Fordi Internet of Things forbinder mere end 7 milliarder enheder verden over om 1.5 millioner i Danmark alene. Det vil derfor gøre vores verden mere digital intilligent og befolkningens hverdag endnu nemmere end den er i dag ved implementationen af 5G";
-String str45Gcon = "Med nye teknologier opstår nye bekymringer, især når 4G allerede udsender stråling og 5G vil få strålingsniveauet til at stige. Dette har allerede fået mange til at spekulere om 5G er sikkert for mennesker. Mange mennesker er derfor allerede begyndt at udtrykke deres holdning og bekymring på internettet.";
-String str5Rad = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G. 5G medbringer højere strålingsniveau end 4G, omkring 25% mere end 4G. Denne stråling er dog ikke skadelig for mennesker i mindre doser";
-String str6Con = "5G er en god mulighed for at bane bølgen for fremtiden og øge den eksponentielle udbredelse af cellulær kommunikation. Verden vil drage stor fordel af denne teknologi, men som de fleste ting følger den med tilknyttede negativer. Det er også op til dig at beslutte, om du vil omfavne den nye teknologi eller være imod den, men en ting er sikkert 5G vil snart være en del af danskernes hverdag.";
+// Text
+String ReadMore = "Læs mere...";
+String ReadMore5G = "5G er godt og det vil bidrage...";
+String TextFor5G = "Hurtigere Internet - Omkring 65 gange hurtigere end det du oplever med 4G. Utrolig Lav Latenstid - Tiden tager det tager for 2 enheder at kommunikere med hinanden - Med 5G latensen kan det nå helt ned på 1 millisekund fremfor 70 millisekunder med 4G.";
+String TextForIoT = "Fordi Internet of Things forbinder mere end 7 milliarder enheder verden over om 1.5 millioner i Danmark alene. Det vil derfor gøre vores verden mere digital intilligent og befolkningens hverdag endnu nemmere end den er i dag ved implementationen af 5G";
+String TextForConcerns = "Med nye teknologier opstår nye bekymringer, især når 4G allerede udsender stråling og 5G vil få strålingsniveauet til at stige. Dette har allerede fået mange til at spekulere om 5G er sikkert for mennesker. Mange mennesker er derfor allerede begyndt at udtrykke deres holdning og bekymring på internettet.";
+String TextForRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G. 5G medbringer højere strålingsniveau end 4G, omkring 25% mere end 4G. Denne stråling er dog ikke skadelig for mennesker i mindre doser";
+String TextForConclusion = "5G er en god mulighed for at bane bølgen for fremtiden og øge den eksponentielle udbredelse af cellulær kommunikation. Verden vil drage stor fordel af denne teknologi, men som de fleste ting følger den med tilknyttede negativer. Det er også op til dig at beslutte, om du vil omfavne den nye teknologi eller være imod den, men en ting er sikkert 5G vil snart være en del af danskernes hverdag.";
 
-//titles for text
-String str35Gtit = "5G Den Nye Teknologi";
-String str4IoTtit = "Internet of Things"; 
-String str55Gcontit = "Bekymringer Omkring 5G";
-String str6Radtit = "Radioaktiv Stråling";
-String str7Con = "Opsumering om 5G"; 
+// Titles
+String Title5G = "5G Den Nye Teknologi";
+String TitleIoT = "Internet of Things"; 
+String TitleConcerns = "Bekymringer Omkring 5G";
+String TitleRadiation = "Radioaktiv Stråling";
+String TitleConclusion = "Opsumering om 5G"; 
 
-PImage backgroundImage, frontgroundImage;
+// Images
+PImage backgroundImage, frontPageImage, finger;
 
 int backgroundColour, screenY;
 int TopLimit = 4014;
 int BottomLimit = 0;
-int YstartingValue = -4248;
+int YstartingValue = -4248;    // The Y-coordinate where to load the 2nd page
+int passedTime;
 
-boolean showImage = true;
-boolean hitbox = true;
 boolean textHasBeenClicked = false;
+boolean frontPage = true;
+boolean on;
+
+float r = 320;
+float theta = 0;
 
 void setup() {
   size(1920, 1080);
   backgroundImage = loadImage("P1CityV3.png");
-  frontgroundImage = loadImage("FrontPage5G.jpg");
+  frontPageImage = loadImage("P1FrontPage.png");
+  finger = loadImage("P1FrontPageFinger.png");
 }
 
+
 void draw() {  
-  if (showImage == true) {    // If condition set for the frontpage
-    image(frontgroundImage, 0, 0);
-  } else if (showImage == false) {
+  if (frontPage == true) {    // If condition set for the frontpage
+    image(frontPageImage, 0, 0);    // Frontpage image
+
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+
+    noStroke();
+    fill(0);
+    ellipse(x + width/2.221, y + height/2.02, 50, 50);
+
+    theta += 0.01;
+
+    image(finger, 0, 0);    // Overlay finger
+  } else if (frontPage == false) {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
 
-  if (textHasBeenClicked) {
-    //display text 2 - New information box
-    fill(0);
-    text (str2, width/2+100, height/2+20+screenY);
-  } else {
-    //display text 1 - Old box
-    fill(0);
-    //textSize(32);
-    text(words, width/2+100, height/2+20+screenY);
+
+
+  println(mouseX, mouseY);
+
+  if (frontPage == false) {    // Condition for the text to appear when showText == true
+    textSize(20);
+    fill(#000000); 
+    text(TitleConcerns, width/2+320, height-2895 +screenY);    // Title for 5G concerns
+    text(TextForConcerns, width/2+250, height-2875+screenY, 350, height-2600+screenY);    // Text for 5G Concerns
+
+    text(TitleRadiation, width/2+400, height-3515+screenY);    // Title for 5G radition
+    text(TextForRadiation, width/2+400, height-3500+screenY, 300, height-3100+screenY);    // Text for radiation
+
+    text(TitleIoT, width/2+150, height-1375+screenY);    // Title for IoT 
+    text(TextForIoT, width/2+150, height-1350+screenY, 300, height-750+screenY);    // Text for IoT
+
+    text(Title5G, width/2+100, height-500+screenY); //5G title pos
+    text(TextFor5G, width/2+100, height-500+screenY, 400, height-300+screenY);    // Text for 5G and position
+
+    fill(#FFFFFF);
+    text(TitleConclusion, width/2-200, height-4820+screenY); //5G concern
+    text(TextForConclusion, width/2-200, height-4800+screenY, 400, height-4400+screenY); // Text for conclusion and position
+
+    if (textHasBeenClicked) {
+      //display text 2 - New information box
+      fill(0);
+      text (ReadMore5G, width/2+100, height/2+20+screenY);
+    } else {
+      //display text 1 - Old box
+      fill(0);
+      //textSize(32);
+      text(ReadMore, width/2+100, height/2+20+screenY);
+    }
   }
-
-  //text about 5G concerns
-
-  //fill(255,0,0);
- 
-  textSize(15);
-  fill(0);
-  text(str45Gcon, width/2+320, height-2875+screenY, 300, height-2600+screenY);
-  text(str5Rad, width/2+400, height-3500+screenY, 300, height-3100+screenY);
-  text(str3IoT, width/2+150, height-1350+screenY, 300, height-750+screenY);
-  text(str35G, width/2+100, height-500+screenY, 400, height-300+screenY);
-  //textSize(45);
-  fill(255);
-  text(str6Con,width/2-200, height-4800+screenY, 400, height-4400+screenY);
-  
-  //Titles for text
-  fill(0);
- 
-  text(str35Gtit, width/2+100, height-500+screenY);
-  text(str4IoTtit, width/2+150, height-1375+screenY);
-  text(str55Gcontit, width/2+320, height-2895 +screenY);
-  text(str6Radtit, width/2+400, height-3515+screenY);
-  
-  fill(255);
-  text(str7Con, width/2-200, height-4820+screenY);
 }
 
+
 void mouseWheel(MouseEvent event) {
-  if (showImage == true) {
-  } else if (showImage == false) {
+  if (frontPage == true) {
+  } else if (frontPage == false) {
     float e = event.getCount();
     screenY = screenY + int(e) * 18;    // Defining the value screenY with the event.getCount(), additionally it also increases the scroll speed
     println(screenY);
@@ -92,12 +110,10 @@ void mouseWheel(MouseEvent event) {
   }
 }
 
+
 void mouseClicked() {  
-  showImage = false;    // Condition for the frontpage to dissapear
-}
+  frontPage = false;
 
-void mousePressed () { if (mouseX > width/2+100 && mouseX < width/2+100 + 200 &&
-      mouseY > height/2-500 && mouseY <height/2+500)
-  textHasBeenClicked = ! textHasBeenClicked;
-
+  if (mouseX > width/2+100 && mouseX < width/2+100 + 200 && mouseY > height/2-500 && mouseY <height/2+500)
+    textHasBeenClicked = ! textHasBeenClicked;
 }

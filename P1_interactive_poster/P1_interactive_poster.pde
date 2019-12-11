@@ -67,3 +67,9 @@ void mouseWheel(MouseEvent event) {
 void mouseClicked() {  
   showImage = false;    // Condition for the frontpage to dissapear
 }
+
+void mousePressed () { if (mouseX > width/2+100 && mouseX < width/2+100 + 200 &&
+      mouseY > height/2-500 && mouseY <height/2+500)
+  textHasBeenClicked = ! textHasBeenClicked;
+
+}

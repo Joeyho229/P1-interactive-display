@@ -6,11 +6,10 @@ String str2 = "5G er godt og det vil bidrage...";
 String str3IoT = "With the Internet of Thing more than billions of devices and physical objects will be connected in an online world. This will quickly make the world smart and people's lives even easier";
 String str45Gcon = "With new technologies arise new concerns, with 4G already emitting radiation this number will rise once 5G is launched. This has already made many to speculate about the safety of implementing 5G on the market. Many people have already begun to express their opinion and concern on the internet.";
 
-
 PImage backgroundImage, frontgroundImage;
 
 int backgroundColour, screenY;
-int TopLimit = 3600;
+int TopLimit = 4014;
 int BottomLimit = 0;
 int YstartingValue = -4248;
 
@@ -20,7 +19,7 @@ boolean textHasBeenClicked = false;
 
 void setup() {
   size(1920, 1080);
-  backgroundImage = loadImage("P1CityTest.png");
+  backgroundImage = loadImage("P1CityV3.png");
   frontgroundImage = loadImage("FrontPage5G.jpg");
 }
 
@@ -57,9 +56,9 @@ void mouseWheel(MouseEvent event) {
     println(screenY);
   }
 
-  if (screenY < 0) {    // Stating the boundaries for minimum scrolling point
+  if (screenY < BottomLimit) {    // Stating the boundaries for minimum scrolling point
     screenY = BottomLimit;
-  } else if (screenY > 3600) {    // Stating the boundaries for maximum scrolling point
+  } else if (screenY > TopLimit) {    // Stating the boundaries for maximum scrolling point
     screenY = TopLimit;
   }
 }

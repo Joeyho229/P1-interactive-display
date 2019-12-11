@@ -1,7 +1,5 @@
 // P1 project, interactive poster
 
-// test
-
 PImage backgroundImage, frontgroundImage;
 
 int[] hitboxRadius = {300, 300};

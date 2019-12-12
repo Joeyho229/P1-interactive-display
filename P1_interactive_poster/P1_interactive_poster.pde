@@ -2,10 +2,10 @@
 
 // Read more text
 String ReadMore = "Læs mere...";
-String ReadMore5G = "BLABLABLABLAAAA";
+String ReadMore5G = "Det næste trin i evolutionen for mobil netværksteknologi er 5G, det vil revolutionere den måde mennesker og digitale enheder kommunikere med hinanden. Den generelle internet hastighed kan nå op på 65 gange hurtigere end det vi oplever i dag. Det er ikke hastigheden der ser betydelig forbedring, latency vil blive betydelig bedre, det er den tid det tager for to enheder at kommunikere med hinanden. Kort sagt betyder det at du kan downloade en HD film på under 30 sekunder, og vil køre selvkørende endnu mere intelligente.";
 String ReadMoreIoT = "Fordi Internet of Things forbinder mere end 7 milliarder enheder verden over og 1.5 millioner i danmark alene. Det vil derfor gøre vores verden mere digital intelligent og befolknings hverdag endnu nemmere end den er i dag, ved implementationen af 5G..";
 String ReadMoreConcerns = "Med nye teknologier opstår nye bekymringer, især når 4G allerede udsender stråling og 5G vil få strålingsniveauet til at stige. Dette har allerede fået mange til at spekulere om 5G er sikkert for mennesker. Mange mennesker er derfor allerede begyndt at udtrykke deres holdning og bekymring på Internettet.";
-String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G, omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, det kan derfor ikke interagere med kroppens atomer og molekyler og er derfor ikke skadelig for naturen og levende organismer. ";
+String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G, omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, det kan derfor ikke interagere med kroppens atomer og molekyler og er derfor ikke skadelig for naturen og levende organismer.";
 String ReadMoreConclusion = "BLABLABLA";
 
 // Bullet point text
@@ -35,6 +35,10 @@ int transparency;
 int movingCircleR = 25;
 
 boolean textHasBeenClicked = false;
+boolean textHasBeenClicked1 = false;
+boolean textHasBeenClicked2 = false;
+boolean textHasBeenClicked3 = false;
+
 boolean frontPage = true;
 boolean on;
 
@@ -79,10 +83,14 @@ void draw() {
   }
 
   if (frontPage == false) {    // Condition for the text to appear when frontPage == false
-    int titleDotX [] = {1122, 1263, 523, 903, 712};  int titleDotY [] = {464, 1080 - 2847, 1080 - 3522, 1080 - 1382, 1080 - 4827};             // Title dot X, Y position
-    int titlePosX [] = {1140, 1280, 543, 920, 732};  int titlePosY [] = {470, 1080 - 2840, 1080 - 3515, 1080 - 1375, 1080 - 4820};             // Title X, Y position
-    int textPosX [] = {1115, 1250, 513, 890, 700};   int textPosY [] = {487, 1080 - 2820, 1080 - 3500, 1080 - 1350, 1080 - 4800};              // Text X, Y position
-    int textBoxSizeX [] = {400, 350, 300, 400, 600}; int textBoxSizeY [] = {1080 - 300, 1080 - 2600, 1080 - 3100, 1080 - 750, 1080 - 4400};    // Text X, Y maximum
+    int titleDotX [] = {1122, 1263, 523, 903, 712};  
+    int titleDotY [] = {464, 1080 - 2847, 1080 - 3522, 1080 - 1382, 1080 - 4827};             // Title dot X, Y position
+    int titlePosX [] = {1140, 1280, 543, 920, 732};  
+    int titlePosY [] = {470, 1080 - 2840, 1080 - 3515, 1080 - 1375, 1080 - 4820};             // Title X, Y position
+    int textPosX [] = {1115, 1250, 513, 890, 700};   
+    int textPosY [] = {487, 1080 - 2820, 1080 - 3500, 1080 - 1350, 1080 - 4800};              // Text X, Y position
+    int textBoxSizeX [] = {400, 350, 300, 400, 600}; 
+    int textBoxSizeY [] = {1080 - 300, 1080 - 2600, 1080 - 3100, 1080 - 750, 1080 - 4400};    // Text X, Y maximum
 
     textSize(22);
     fill(normalTextColour); 
@@ -134,38 +142,43 @@ void draw() {
       else fill(#08FFA2);
       on = !on;
 
-      ellipse(dotX[0], dotY[0] + screenY, dotR, dotR);    // Read more dot for 5G
-      ellipse(dotX[1], dotY[1] + screenY, dotR, dotR);    // Read more dot for IoT
-      ellipse(dotX[2], dotY[2] + screenY, dotR, dotR);    // Read more dot for concerns
-      ellipse(dotX[3], dotY[3] + screenY, dotR, dotR);    // Read more dot for radiation
-      ellipse(dotX[4], dotY[4] + screenY, dotR, dotR);    // Read more dot for conclusion
+      ellipse(dotX[0], dotY[0] + screenY, dotR, dotR);      // Read more dot for 5G
+      ellipse(dotX[1], dotY[1] + screenY, dotR, dotR);      // Read more dot for IoT
+      ellipse(dotX[2], dotY[2] + screenY, dotR, dotR);      // Read more dot for concerns
+      ellipse(dotX[3], dotY[3] + screenY, dotR, dotR);      // Read more dot for radiation
+      //ellipse(dotX[4], dotY[4] + screenY, dotR, dotR);    // Read more dot for conclusion
     }
 
 
     // Text and position for the "read more" titles, text and buttons
-    int readMoreX [] = {1290, 1100, 1460, 740, 974};  
-    int readMoreY [] = {640, height - 1190, height - 2700, height - 3380, height - 4520};      // Read more text X, Y position
-    int readMoreTX [] = {1290, 1100, 1460, 740, 984};  
-    int readMoreTY [] = {640, height - 1190, height - 2700, height - 3380, height - 4520};    // Read more title X, Y position
+    int readMoreX [] = {1290, 1100, 1460, 740};  
+    int readMoreY [] = {640, height - 1190, height - 2700, height - 3380};      // Read more text X, Y position
+    int readMoreTX [] = {1290, 1100, 1460, 740};  
+    int readMoreTY [] = {640, height - 1190, height - 2700, height - 3380};    // Read more title X, Y position
 
+    fill(normalTextColour);
     if (textHasBeenClicked) {                                                                                         // Display the extended informative stuff
-      fill(normalTextColour);                                                                                         // Colour for the displayed text
       text (ReadMore5G, readMoreX[0], readMoreY[0] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);            // Read more about text for 5G
+    } else {                                                                                                          // Display the "læs mere" text
+      text(ReadMore, readMoreTX[0], readMoreTY[0] + screenY);                                                         // Read more title for 5G
+    }
+
+    if (textHasBeenClicked1) {                                                                                        // Display the extended informative stuff
       text (ReadMoreIoT, readMoreX[1], readMoreY[1] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);           // Read more about text for IoT
+    } else {                                                                                                          // Display the "læs mere" text
+      text(ReadMore, readMoreTX[1], readMoreTY[1] + screenY);                                                         // Read more title for IoT
+    }                                                              
+
+    if (textHasBeenClicked2) {                                                                                        // Display the extended informative stuff
       text (ReadMoreConcerns, readMoreX[2], readMoreY[2] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);      // Read more about text for concerns
+    } else {                                                                                                          // Display the "læs mere" text
+      text(ReadMore, readMoreTX[2], readMoreTY[2] + screenY);                                                         // Read more title for concerns
+    }
+
+    if (textHasBeenClicked3) {                                                                                        // Display the exentded informative stuff
       text (ReadMoreRadiation, readMoreX[3], readMoreY[3] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);     // Read more about text for radiation
-
-      fill(spaceTextColour);                                              // Colour for the displayed text
-      text (ReadMoreConclusion, readMoreX[4], readMoreY[4] + screenY);    // Read more about text for conclusion
-    } else {                                                              // Display the "læs mere" text
-      fill(normalTextColour);                                             // Colour for the displayed text
-      text(ReadMore, readMoreTX[0], readMoreTY[0] + screenY);             // Read more title for 5G
-      text(ReadMore, readMoreTX[1], readMoreTY[1] + screenY);             // Read more title for IoT
-      text(ReadMore, readMoreTX[2], readMoreTY[2] + screenY);             // Read more title for concerns
-      text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);             // Read more title for radiation
-
-      fill(spaceTextColour);                                              // Colour for the displayed text
-      text(ReadMore, readMoreTX[4], readMoreTY[4] + screenY);             // Read more title for conclusion
+    } else {                                                                                                          // Display the "læs mere" text
+      text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);                                                         // Read more title for radiation
     }
   }
 }
@@ -192,19 +205,15 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked() {  
   frontPage = false;
-
   if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY)    // Hitbox criteria for 5G
-  textHasBeenClicked = ! textHasBeenClicked;
-  
+    textHasBeenClicked = ! textHasBeenClicked;
+
   if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY)    // Hitbox criteria for IoT
-  textHasBeenClicked = ! textHasBeenClicked;
-  
+    textHasBeenClicked1 = ! textHasBeenClicked1;
+
   if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY)    // Hitbox criteria for concerns
-  textHasBeenClicked = ! textHasBeenClicked;
+    textHasBeenClicked2 = ! textHasBeenClicked2;
 
   if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY)    // Hitbox criteria for radiation
-  textHasBeenClicked = ! textHasBeenClicked;
-  
-  if (mouseX > hitBoxX[4] && mouseX < hitBoxX[4] + hitBoxSizeX && mouseY > hitBoxY[4] + screenY && mouseY < hitBoxY[4] + hitBoxSizeY + screenY)    // Hitbox criteria for conclusion
-  textHasBeenClicked = ! textHasBeenClicked;
+    textHasBeenClicked3 = ! textHasBeenClicked3;
 }

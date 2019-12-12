@@ -22,7 +22,7 @@ String TitleRadiation = "Radioaktiv Stråling";
 String TitleConclusion = "Opsumering om 5G"; 
 
 // Images
-PImage backgroundImage, frontPageImage, finger;
+PImage backgroundImage, frontPageImage, finger, cloud, cloud1, cloud2, thinking;
 
 int backgroundColour, screenY;
 int YstartingValue = -4248;    // The starting Y-coordinate where to load the 2nd page
@@ -50,6 +50,10 @@ void setup() {
   backgroundImage = loadImage("P1CityV3.png");
   frontPageImage = loadImage("P1FrontPage.png");
   finger = loadImage("P1FrontPageFinger.png");
+  cloud = loadImage("cloud.png");
+  cloud1 = loadImage("cloud1.png");
+  cloud2 = loadImage("cloud2.png");
+  thinking = loadImage("thinking.png");
 }
 
 
@@ -72,20 +76,16 @@ void draw() {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
 
-  println(mouseX, mouseY + screenY);    // Testing tools
+  println(mouseX, mouseY + screenY);                        // Testing tools
   if (keyPressed == true) {
     println(height);
   }
 
   if (frontPage == false) {    // Condition for the text to appear when frontPage == false
-    int titleDotX [] = {1122, 1263, 523, 903, 712};  
-    int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot X, Y position
-    int titlePosX [] = {1140, 1280, 543, 920, 732};  
-    int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title X, Y position
-    int textPosX [] = {1115, 1250, 513, 890, 700};   
-    int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text X, Y position
-    int textBoxSizeX [] = {600, 350, 300, 400, 600}; 
-    int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};    // Text X, Y maximum
+    int titleDotX [] = {1122, 1263, 523, 903, 712};  int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot X, Y position
+    int titlePosX [] = {1140, 1280, 543, 920, 732};  int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title X, Y position
+    int textPosX [] = {1115, 1250, 513, 890, 700};   int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text X, Y position
+    int textBoxSizeX [] = {500, 350, 300, 400, 600}; int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};           // Text X, Y maximum
 
     textSize(22);
     fill(normalTextColour); 
@@ -113,7 +113,7 @@ void draw() {
     // 5G conclusion
     fill(spaceTextColour);
     ellipse(titleDotX[4], titleDotY[4] + screenY, dotR, dotR);                                                // Dot for 5G conclusion
-    text(TitleConclusion, titlePosX[4], titlePosY[4] + screenY);                                              //5G conclusion
+    text(TitleConclusion, titlePosX[4], titlePosY[4] + screenY);                                              // 5G conclusion
     text(TextForConclusion, textPosX[4], textPosY[4] + screenY, textBoxSizeX[4], textBoxSizeY[0] + screenY);  // Text for conclusion and position
 
 
@@ -130,7 +130,7 @@ void draw() {
 
     // Animation for blinking dots for each "read more" title text
     int dotX [] = {1280, 1090, 1450, 730, 964};  
-    int dotY [] = {633, -117, -1627, -2307, -3447};    // Read more title dot X, Y position
+    int dotY [] = {633, -117, -1627, -2307, -3447};         // Read more title dot X, Y position
 
     if (frameCount% 1 == 0) {
       if (on) fill(#FF0808);
@@ -145,35 +145,48 @@ void draw() {
 
 
     // Text and position for the "read more" titles, text and buttons
-    int readMoreX [] = {1290, 1100, 1460, 740};  
-    int readMoreY [] = {640, -110, -1620, -2300};      // Read more text X, Y position
-    int readMoreTX [] = {1290, 1100, 1460, 740};  
-    int readMoreTY [] = {640, -110, -1620, -2300};    // Read more title X, Y position
+    int readMoreX [] = {1400, 1100, 1460, 740};  int readMoreY [] = {70, -110, -1620, -2300};           // Read more text X, Y position
+    int readMoreTX [] = {1290, 1100, 1460, 740}; int readMoreTY [] = {640, -110, -1620, -2300};         // Read more title X, Y position
+    int pictureX [] = {readMoreX[0], readMoreX[1], readMoreX[2], readMoreX[3]};
+    int pictureY [] = {readMoreY[0], readMoreY[1], readMoreY[2], readMoreY[3]};
+
+    int offSetX [] = {-10, 75, 150, 0};  int offSetY [] = {280, 65, 90, 0};                             // Extra values for offsetting
 
     fill(normalTextColour);
-    if (textHasBeenClicked[0]) {                                                                                       // Display the extended informative stuff
-      text (ReadMore5G, readMoreX[0], readMoreY[0] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);            // Read more about text for 5G
-    } else {                                                                                                          // Display the "læs mere" text
-      text(ReadMore, readMoreTX[0], readMoreTY[0] + screenY);                                                         // Read more title for 5G
+    imageMode(CENTER);
+    if (textHasBeenClicked[0]) {                                                                                            // Display the extended informative stuff
+      thinking.resize(750, 750);                                                                                            // Thinking image size
+      image(thinking, pictureX[0] + textBoxSizeX[0]/2, pictureY[0] + offSetY[0] + screenY);                                 // Thinking image position
+      text (ReadMore5G, readMoreX[0], readMoreY[0] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);                  // Read more about text for 5G
+      } else {                                                                                                              // Display the "læs mere" text
+      text(ReadMore, readMoreTX[0], readMoreTY[0] + screenY);                                                               // Read more title for 5G
     }
 
-    if (textHasBeenClicked[1]) {                                                                                        // Display the extended informative stuff
-      text (ReadMoreIoT, readMoreX[1], readMoreY[1] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);           // Read more about text for IoT
-    } else {                                                                                                          // Display the "læs mere" text
-      text(ReadMore, readMoreTX[1], readMoreTY[1] + screenY);                                                         // Read more title for IoT
+    if (textHasBeenClicked[1]) {                                                                                            // Display the extended informative stuff
+      cloud.resize(1200, 650);                                                                                              // Cloud image size
+      image(cloud, pictureX[1] + offSetX[1] + textBoxSizeX[1]/2, pictureY[1] + offSetY[1] + screenY);                       // Cloud image position
+      text (ReadMoreIoT, readMoreX[1], readMoreY[1] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);                 // Read more about text for IoT
+    } else {                                                                                                                // Display the "læs mere" text
+      text(ReadMore, readMoreTX[1], readMoreTY[1] + screenY);                                                               // Read more title for IoT
     }                                                              
 
-    if (textHasBeenClicked[2]) {                                                                                        // Display the extended informative stuff
-      text (ReadMoreConcerns, readMoreX[2], readMoreY[2] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);      // Read more about text for concerns
-    } else {                                                                                                          // Display the "læs mere" text
-      text(ReadMore, readMoreTX[2], readMoreTY[2] + screenY);                                                         // Read more title for concerns
+    if (textHasBeenClicked[2]) {                                                                                            // Display the extended informative stuff
+      cloud1.resize(800, 1600);                                                                                             // Cloud1 image size
+      image(cloud1, pictureX[2] + offSetX[2], pictureY[2] + offSetY[2] + screenY);                                          // Cloud1 image position
+      text (ReadMoreConcerns, readMoreX[2], readMoreY[2] + screenY, textBoxSizeX[0] - 100, textBoxSizeY[0] + screenY);      // Read more about text for concerns
+    } else {                                                                                                                // Display the "læs mere" text
+      text(ReadMore, readMoreTX[2], readMoreTY[2] + screenY);                                                               // Read more title for concerns
     }
 
-    if (textHasBeenClicked[3]) {                                                                                        // Display the exentded informative stuff
-      text (ReadMoreRadiation, readMoreX[3], readMoreY[3] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);     // Read more about text for radiation
-    } else {                                                                                                          // Display the "læs mere" text
-      text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);                                                         // Read more title for radiation
+    if (textHasBeenClicked[3]) {                                                                                            // Display the exentded informative stuff
+      cloud2.resize(1200, 900);                                                                                             // Cloud2 image size
+      image(cloud2, pictureX[3] + 220, pictureY[3] + 140 + screenY);                                                        // Cloud2 image position
+      text (ReadMoreRadiation, readMoreX[3], readMoreY[3] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);           // Read more about text for radiation
+    } else {                                                                                                                // Display the "læs mere" text
+      text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);                                                               // Read more title for radiation
     }
+
+    imageMode(CORNER);
   }
 }
 

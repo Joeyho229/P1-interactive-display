@@ -6,7 +6,6 @@ String ReadMore5G = "Det næste trin i evolutionen for mobil netværksteknologi 
 String ReadMoreIoT = "Fordi Internet of Things forbinder mere end 7 milliarder enheder verden over og 1.5 millioner i danmark alene. Det vil derfor gøre vores verden mere digital intelligent og befolknings hverdag endnu nemmere end den er i dag, ved implementationen af 5G..";
 String ReadMoreConcerns = "Med nye teknologier opstår nye bekymringer, især når 4G allerede udsender stråling og 5G vil få strålingsniveauet til at stige. Dette har allerede fået mange til at spekulere om 5G er sikkert for mennesker. Mange mennesker er derfor allerede begyndt at udtrykke deres holdning og bekymring på Internettet.";
 String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G, omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, det kan derfor ikke interagere med kroppens atomer og molekyler og er derfor ikke skadelig for naturen og levende organismer.";
-String ReadMoreConclusion = "BLABLABLA";
 
 // Bullet point text
 String TextFor5G = "Hurtigere Internet\nEt mere forbundet samfund\nGavner digital kommunikation\nForbedret dæknings ydeevne";
@@ -34,11 +33,7 @@ int normalTextColour = #000000;
 int transparency;
 int movingCircleR = 25;
 
-boolean textHasBeenClicked = false;
-boolean textHasBeenClicked1 = false;
-boolean textHasBeenClicked2 = false;
-boolean textHasBeenClicked3 = false;
-
+boolean textHasBeenClicked [] = {false, false, false, false};
 boolean frontPage = true;
 boolean on;
 
@@ -46,7 +41,7 @@ float r = 320;
 float theta = 0;
 
 int hitBoxX [] = {1269, 1080, 1440, 720, 950};
-int hitBoxY [] = {615, 1080 - 1213, 1080 - 2724, 1080 - 3404, 1080 - 4548};
+int hitBoxY [] = {615, -133, -1644, -2324, -3468};
 int hitBoxSizeX = 150;
 int hitBoxSizeY = 40;
 
@@ -84,13 +79,13 @@ void draw() {
 
   if (frontPage == false) {    // Condition for the text to appear when frontPage == false
     int titleDotX [] = {1122, 1263, 523, 903, 712};  
-    int titleDotY [] = {464, 1080 - 2847, 1080 - 3522, 1080 - 1382, 1080 - 4827};             // Title dot X, Y position
+    int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot X, Y position
     int titlePosX [] = {1140, 1280, 543, 920, 732};  
-    int titlePosY [] = {470, 1080 - 2840, 1080 - 3515, 1080 - 1375, 1080 - 4820};             // Title X, Y position
+    int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title X, Y position
     int textPosX [] = {1115, 1250, 513, 890, 700};   
-    int textPosY [] = {487, 1080 - 2820, 1080 - 3500, 1080 - 1350, 1080 - 4800};              // Text X, Y position
-    int textBoxSizeX [] = {400, 350, 300, 400, 600}; 
-    int textBoxSizeY [] = {1080 - 300, 1080 - 2600, 1080 - 3100, 1080 - 750, 1080 - 4400};    // Text X, Y maximum
+    int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text X, Y position
+    int textBoxSizeX [] = {600, 350, 300, 400, 600}; 
+    int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};    // Text X, Y maximum
 
     textSize(22);
     fill(normalTextColour); 
@@ -135,7 +130,7 @@ void draw() {
 
     // Animation for blinking dots for each "read more" title text
     int dotX [] = {1280, 1090, 1450, 730, 964};  
-    int dotY [] = {633, height - 1197, height - 2707, height - 3387, height - 4527};    // Read more title dot X, Y position
+    int dotY [] = {633, -117, -1627, -2307, -3447};    // Read more title dot X, Y position
 
     if (frameCount% 1 == 0) {
       if (on) fill(#FF0808);
@@ -146,36 +141,35 @@ void draw() {
       ellipse(dotX[1], dotY[1] + screenY, dotR, dotR);      // Read more dot for IoT
       ellipse(dotX[2], dotY[2] + screenY, dotR, dotR);      // Read more dot for concerns
       ellipse(dotX[3], dotY[3] + screenY, dotR, dotR);      // Read more dot for radiation
-      //ellipse(dotX[4], dotY[4] + screenY, dotR, dotR);    // Read more dot for conclusion
     }
 
 
     // Text and position for the "read more" titles, text and buttons
     int readMoreX [] = {1290, 1100, 1460, 740};  
-    int readMoreY [] = {640, height - 1190, height - 2700, height - 3380};      // Read more text X, Y position
+    int readMoreY [] = {640, -110, -1620, -2300};      // Read more text X, Y position
     int readMoreTX [] = {1290, 1100, 1460, 740};  
-    int readMoreTY [] = {640, height - 1190, height - 2700, height - 3380};    // Read more title X, Y position
+    int readMoreTY [] = {640, -110, -1620, -2300};    // Read more title X, Y position
 
     fill(normalTextColour);
-    if (textHasBeenClicked) {                                                                                         // Display the extended informative stuff
+    if (textHasBeenClicked[0]) {                                                                                       // Display the extended informative stuff
       text (ReadMore5G, readMoreX[0], readMoreY[0] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);            // Read more about text for 5G
     } else {                                                                                                          // Display the "læs mere" text
       text(ReadMore, readMoreTX[0], readMoreTY[0] + screenY);                                                         // Read more title for 5G
     }
 
-    if (textHasBeenClicked1) {                                                                                        // Display the extended informative stuff
+    if (textHasBeenClicked[1]) {                                                                                        // Display the extended informative stuff
       text (ReadMoreIoT, readMoreX[1], readMoreY[1] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);           // Read more about text for IoT
     } else {                                                                                                          // Display the "læs mere" text
       text(ReadMore, readMoreTX[1], readMoreTY[1] + screenY);                                                         // Read more title for IoT
     }                                                              
 
-    if (textHasBeenClicked2) {                                                                                        // Display the extended informative stuff
+    if (textHasBeenClicked[2]) {                                                                                        // Display the extended informative stuff
       text (ReadMoreConcerns, readMoreX[2], readMoreY[2] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);      // Read more about text for concerns
     } else {                                                                                                          // Display the "læs mere" text
       text(ReadMore, readMoreTX[2], readMoreTY[2] + screenY);                                                         // Read more title for concerns
     }
 
-    if (textHasBeenClicked3) {                                                                                        // Display the exentded informative stuff
+    if (textHasBeenClicked[3]) {                                                                                        // Display the exentded informative stuff
       text (ReadMoreRadiation, readMoreX[3], readMoreY[3] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);     // Read more about text for radiation
     } else {                                                                                                          // Display the "læs mere" text
       text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);                                                         // Read more title for radiation
@@ -206,14 +200,14 @@ void mouseWheel(MouseEvent event) {
 void mouseClicked() {  
   frontPage = false;
   if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY)    // Hitbox criteria for 5G
-    textHasBeenClicked = ! textHasBeenClicked;
+    textHasBeenClicked[0] = ! textHasBeenClicked[0];
 
   if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY)    // Hitbox criteria for IoT
-    textHasBeenClicked1 = ! textHasBeenClicked1;
+    textHasBeenClicked[1] = ! textHasBeenClicked[1];
 
   if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY)    // Hitbox criteria for concerns
-    textHasBeenClicked2 = ! textHasBeenClicked2;
+    textHasBeenClicked[2] = ! textHasBeenClicked[2];
 
   if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY)    // Hitbox criteria for radiation
-    textHasBeenClicked3 = ! textHasBeenClicked3;
+    textHasBeenClicked[3] = ! textHasBeenClicked[3];
 }

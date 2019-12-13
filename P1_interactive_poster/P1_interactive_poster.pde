@@ -22,7 +22,7 @@ String TitleRadiation = "Radioaktiv Stråling";
 String TitleConclusion = "Opsumering om 5G"; 
 
 // Images
-PImage backgroundImage, frontPageImage, finger, cloud, cloud1, cloud2, thinking;
+PImage backgroundImage, frontPageImage, finger, cloud, cloud1, cloud2, thinking, arrow, rotatedWArrow, rotatedBArrow;
 
 int backgroundColour, screenY;
 int YstartingValue = -4248;    // The starting Y-coordinate where to load the 2nd page
@@ -32,6 +32,13 @@ int spaceTextColour = #FFFFFF;
 int normalTextColour = #000000;
 int transparency;
 int movingCircleR = 25;
+int TopLimit = 4014;                  // Max scrolling height
+int BottomLimit = 0;                  // Minimum scrolling height
+int arrowX = 78;
+int arrowY = 120;
+int arrowSpeed = -3;
+int arrowTop = 50;
+int arrowMin = 120;
 
 boolean textHasBeenClicked [] = {false, false, false, false};
 boolean frontPage = true;
@@ -54,6 +61,9 @@ void setup() {
   cloud1 = loadImage("cloud1.png");
   cloud2 = loadImage("cloud2.png");
   thinking = loadImage("thinking.png");
+  arrow = loadImage("Arrow.png");
+  rotatedWArrow = loadImage("rotatedWArrow.png");
+  rotatedBArrow = loadImage("rotatedBArrow.png");
 }
 
 
@@ -76,16 +86,19 @@ void draw() {
     image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
 
-  println(mouseX, mouseY + screenY);                        // Testing tools
-  if (keyPressed == true) {
-    println(height);
-  }
+
+  println(mouseX, mouseY + screenY);                        // Testing tools 
+
 
   if (frontPage == false) {    // Condition for the text to appear when frontPage == false
-    int titleDotX [] = {1122, 1263, 523, 903, 712};  int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot X, Y position
-    int titlePosX [] = {1140, 1280, 543, 920, 732};  int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title X, Y position
-    int textPosX [] = {1115, 1250, 513, 890, 700};   int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text X, Y position
-    int textBoxSizeX [] = {500, 350, 300, 400, 600}; int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};           // Text X, Y maximum
+    int titleDotX [] = {1122, 1263, 523, 903, 712};  
+    int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot X, Y position
+    int titlePosX [] = {1140, 1280, 543, 920, 732};  
+    int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title X, Y position
+    int textPosX [] = {1115, 1250, 513, 890, 700};   
+    int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text X, Y position
+    int textBoxSizeX [] = {500, 350, 300, 400, 600}; 
+    int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};           // Text X, Y maximum
 
     textSize(22);
     fill(normalTextColour); 
@@ -129,36 +142,35 @@ void draw() {
 
 
     // Animation for blinking dots for each "read more" title text
-    int dotX [] = {1280, 1090, 1450, 730, 964};  
-    int dotY [] = {633, -117, -1627, -2307, -3447};         // Read more title dot X, Y position
+    int titleArrowX [] = {1265, 1075, 1435, 715};  
+    int titleArrowY [] = {632, -118, -1628, -2308};         // Read more title arrow X, Y position
 
-    if (frameCount% 1 == 0) {
-      if (on) fill(#FF0808);
-      else fill(#08FFA2);
-      on = !on;
+    imageMode(CENTER);
+    rotatedWArrow.resize(40, 20);
+    rotatedBArrow.resize(40, 20);
 
-      ellipse(dotX[0], dotY[0] + screenY, dotR, dotR);      // Read more dot for 5G
-      ellipse(dotX[1], dotY[1] + screenY, dotR, dotR);      // Read more dot for IoT
-      ellipse(dotX[2], dotY[2] + screenY, dotR, dotR);      // Read more dot for concerns
-      ellipse(dotX[3], dotY[3] + screenY, dotR, dotR);      // Read more dot for radiation
-    }
-
+    image(rotatedBArrow, titleArrowX[0], titleArrowY[0] + screenY);
+    image(rotatedWArrow, titleArrowX[1], titleArrowY[1] + screenY);
+    image(rotatedBArrow, titleArrowX[2], titleArrowY[2] + screenY);
+    image(rotatedWArrow, titleArrowX[3], titleArrowY[3] + screenY);
 
     // Text and position for the "read more" titles, text and buttons
-    int readMoreX [] = {1400, 1100, 1460, 740};  int readMoreY [] = {70, -110, -1620, -2300};           // Read more text X, Y position
-    int readMoreTX [] = {1290, 1100, 1460, 740}; int readMoreTY [] = {640, -110, -1620, -2300};         // Read more title X, Y position
+    int readMoreX [] = {1400, 1100, 1460, 740};  
+    int readMoreY [] = {70, -110, -1620, -2300};           // Read more text X, Y position
+    int readMoreTX [] = {1290, 1100, 1460, 740}; 
+    int readMoreTY [] = {640, -110, -1620, -2300};         // Read more title X, Y position
     int pictureX [] = {readMoreX[0], readMoreX[1], readMoreX[2], readMoreX[3]};
     int pictureY [] = {readMoreY[0], readMoreY[1], readMoreY[2], readMoreY[3]};
 
-    int offSetX [] = {-10, 75, 150, 0};  int offSetY [] = {280, 65, 90, 0};                             // Extra values for offsetting
+    int offSetX [] = {-10, 75, 150, 0};  
+    int offSetY [] = {280, 65, 90, 0};                     // Extra values for offsetting
 
     fill(normalTextColour);
-    imageMode(CENTER);
     if (textHasBeenClicked[0]) {                                                                                            // Display the extended informative stuff
       thinking.resize(750, 750);                                                                                            // Thinking image size
       image(thinking, pictureX[0] + textBoxSizeX[0]/2, pictureY[0] + offSetY[0] + screenY);                                 // Thinking image position
       text (ReadMore5G, readMoreX[0], readMoreY[0] + screenY, textBoxSizeX[0], textBoxSizeY[0] + screenY);                  // Read more about text for 5G
-      } else {                                                                                                              // Display the "læs mere" text
+    } else {                                                                                                                // Display the "læs mere" text
       text(ReadMore, readMoreTX[0], readMoreTY[0] + screenY);                                                               // Read more title for 5G
     }
 
@@ -186,9 +198,19 @@ void draw() {
       text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);                                                               // Read more title for radiation
     }
 
-    imageMode(CORNER);
+    if ( screenY < TopLimit ) {                                                                 // Condition set for when the arrow to dissapear
+      arrowY = arrowY + arrowSpeed;                                                             // Adding arrowSpeed into the variable arrowY
+      arrow.resize(60, 100);                                                                    // Resizing the image
+      image(arrow, arrowX, arrowY);                                                             // Loading the arrow image with X, Y coordinates
+      if ( arrowY < arrowTop || arrowY > arrowMin ) {                                           // Condition set for what the arrow should do when it reaches the required target
+        arrowSpeed *= -1;                                                                       // arrowSpeed gets incremented by -1 when the code is run
+      }
+    }
   }
+
+  imageMode(CORNER);
 }
+
 
 
 // Event for what happens when the mouse wheel is scrolled
@@ -200,8 +222,6 @@ void mouseWheel(MouseEvent event) {
     println(screenY);
   }
 
-  int TopLimit = 4014;                  // Max scrolling height
-  int BottomLimit = 0;                  // Minimum scrolling height
   if (screenY < BottomLimit) {          // Stating the boundaries for minimum scrolling point
     screenY = BottomLimit;
   } else if (screenY > TopLimit) {      // Stating the boundaries for maximum scrolling point
@@ -212,15 +232,31 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked() {  
   frontPage = false;
-  if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY)    // Hitbox criteria for 5G
+  if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY) {    // Hitbox criteria for 5G
     textHasBeenClicked[0] = ! textHasBeenClicked[0];
+    textHasBeenClicked[1] = false;
+    textHasBeenClicked[2] = false;
+    textHasBeenClicked[3] = false;
+  }
 
-  if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY)    // Hitbox criteria for IoT
+  if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY) {    // Hitbox criteria for IoT
     textHasBeenClicked[1] = ! textHasBeenClicked[1];
+    textHasBeenClicked[0] = false;
+    textHasBeenClicked[2] = false;
+    textHasBeenClicked[3] = false;
+  }
 
-  if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY)    // Hitbox criteria for concerns
+  if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY) {    // Hitbox criteria for concerns
     textHasBeenClicked[2] = ! textHasBeenClicked[2];
+    textHasBeenClicked[0] = false;
+    textHasBeenClicked[1] = false;
+    textHasBeenClicked[3] = false;
+  }
 
-  if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY)    // Hitbox criteria for radiation
+  if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY) {    // Hitbox criteria for radiation
     textHasBeenClicked[3] = ! textHasBeenClicked[3];
+    textHasBeenClicked[0] = false;
+    textHasBeenClicked[1] = false;
+    textHasBeenClicked[2] = false;
+  }
 }

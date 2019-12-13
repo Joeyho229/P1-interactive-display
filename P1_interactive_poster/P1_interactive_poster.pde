@@ -24,33 +24,40 @@ String TitleConclusion = "Opsumering om 5G";
 // Images
 PImage backgroundImage, frontPageImage, finger, cloud, cloud1, cloud2, thinking, arrow, rotatedWArrow, rotatedBArrow;
 
-int backgroundColour, screenY;
-int YstartingValue = -4248;    // The starting Y-coordinate where to load the 2nd page
-int passedTime;
-int dotR = 10;
-int spaceTextColour = #FFFFFF;
-int normalTextColour = #000000;
-int transparency;
-int movingCircleR = 25;
-int TopLimit = 4014;                  // Max scrolling height
-int BottomLimit = 0;                  // Minimum scrolling height
-int arrowX = 78;
-int arrowY = 120;
-int arrowSpeed = -3;
-int arrowTop = 50;
-int arrowMin = 120;
+int backgroundColour, screenY;  
+int YstartingValue = -4248;                               // The starting Y-coordinate where to load the 2nd page
+int dotR = 10;                                            // Radius for small dot at every text start
+int spaceTextColour = #FFFFFF;                            // Colour for text that is in the space area
+int normalTextColour = #000000;                           // Colour for text that is in the non-space area
+int transparency;                                         // Transparency toggle
+int movingCircleR = 25;                                   // Frontpage moving circle radius
+int TopLimit = 4014;                                      // Max scrolling height
+int BottomLimit = 0;                                      // Minimum scrolling height
+
+int arrowX = 78;                                          // Guidance arrow for scrolling X position
+int arrowY = 120;                                         // Guidance arrow for scrolling Y position
+int arrowSpeed = -2;                                      // Speed for guidance arrow
+int arrowTop = 50;                                        // Top limit for guidance arrow
+int arrowMin = 120;                                       // Minimum limit for guidance arrow
 
 boolean textHasBeenClicked [] = {false, false, false, false};
 boolean frontPage = true;
-boolean on;
 
 float r = 320;
 float theta = 0;
 
-int hitBoxX [] = {1269, 1080, 1440, 720, 950};
-int hitBoxY [] = {615, -133, -1644, -2324, -3468};
-int hitBoxSizeX = 150;
-int hitBoxSizeY = 40;
+float titleArrowX [] = {1265, 1075, 1435, 715};           // Arrows pointing at "read more" X positions
+float titleArrowY [] = {632, -118, -1628, -2308};         // Arrows pointing at "read more" Y positions
+
+float rotatedArrowSpeed [] = {-0.5, -0.5, -0.5, -0.5};    // Arrows pointing at "read more" animation speed
+float rotatedArrowMax [] = {1265, 1075, 1435, 715};       // Arrows pointing at "read more" max limit
+float rotatedArrowMin [] = {1255, 1065, 1425, 705};       // Arrows pointing at "read more" minimum limit
+
+int hitBoxX [] = {1269, 1080, 1440, 720, 950};            // "Read more" hitbox X coordinates
+int hitBoxY [] = {615, -133, -1644, -2324, -3468};        // "Read more" hitbox Y coordinates
+int hitBoxSizeX = 150;                                    // "Read more" hitbox X size
+int hitBoxSizeY = 40;                                     // "Read more" hitbox Y size
+
 
 void setup() {
   size(1920, 1080);
@@ -68,37 +75,32 @@ void setup() {
 
 
 void draw() {  
-  if (frontPage == true) {            // If condition set for the frontpage
-    image(frontPageImage, 0, 0);      // Frontpage image
-
+  if (frontPage == true) {                                           // If condition set for the frontpage
+    image(frontPageImage, 0, 0);                                     // Frontpage image
     float x = r * cos(theta);
     float y = r * sin(theta);
-
     transparency = 120;
     noStroke();
     fill(#FFFFFF, transparency);
     ellipse(x + width/2.221, y + height/2.02, movingCircleR, movingCircleR);
-
     theta += 0.04;
 
-    image(finger, 0, 0);                                    // Overlay finger
+    image(finger, 0, 0);                                             // Overlay finger
   } else if (frontPage == false) {
-    image(backgroundImage, 0, YstartingValue + screenY);    // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
+    image(backgroundImage, 0, YstartingValue + screenY);             // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
   }
 
+  println(mouseX, mouseY + screenY);                                 // Testing tools 
 
-  println(mouseX, mouseY + screenY);                        // Testing tools 
-
-
-  if (frontPage == false) {    // Condition for the text to appear when frontPage == false
-    int titleDotX [] = {1122, 1263, 523, 903, 712};  
-    int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot X, Y position
-    int titlePosX [] = {1140, 1280, 543, 920, 732};  
-    int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title X, Y position
-    int textPosX [] = {1115, 1250, 513, 890, 700};   
-    int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text X, Y position
-    int textBoxSizeX [] = {500, 350, 300, 400, 600}; 
-    int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};           // Text X, Y maximum
+  if (frontPage == false) {                                          // Condition for the text to appear when frontPage == false
+    int titleDotX [] = {1122, 1263, 523, 903, 712};                  // Title dot X position
+    int titleDotY [] = {464, -1767, -2442, -302, -3747};             // Title dot Y position
+    int titlePosX [] = {1140, 1280, 543, 920, 732};                  // Title X position
+    int titlePosY [] = {470, -1760, -2435, -295, -3740};             // Title Y position
+    int textPosX [] = {1115, 1250, 513, 890, 700};                   // Text X position
+    int textPosY [] = {487, -1740, -2420, -270, -3720};              // Text Y position
+    int textBoxSizeX [] = {500, 350, 300, 400, 600};                 // Text box sizes X value
+    int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};           // Text box sizes Y value
 
     textSize(22);
     fill(normalTextColour); 
@@ -140,30 +142,47 @@ void draw() {
     rect(hitBoxX[3], hitBoxY[3] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about radiation
     rect(hitBoxX[4], hitBoxY[4] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about conclusion
 
+    imageMode(CENTER);                                                   // Setting image X, Y center point
+    rotatedWArrow.resize(40, 20);                                        // Resizing the picture for the rotated white arrow
+    rotatedBArrow.resize(40, 20);                                        // Resizing the picture for the rotated black arrow
 
-    // Animation for blinking dots for each "read more" title text
-    int titleArrowX [] = {1265, 1075, 1435, 715};  
-    int titleArrowY [] = {632, -118, -1628, -2308};         // Read more title arrow X, Y position
+    titleArrowX[0] += rotatedArrowSpeed[0];                              // Combining the titleArrowX[0] together with rotatedArrowSpeed[0]
+    titleArrowX[1] += rotatedArrowSpeed[1];                              // Combining the titleArrowX[1] together with rotatedArrowSpeed[1]
+    titleArrowX[2] += rotatedArrowSpeed[2];                              // Combining the titleArrowX[2] together with rotatedArrowSpeed[2]
+    titleArrowX[3] += rotatedArrowSpeed[3];                              // Combining the titleArrowX[3] together with rotatedArrowSpeed[3]
 
-    imageMode(CENTER);
-    rotatedWArrow.resize(40, 20);
-    rotatedBArrow.resize(40, 20);
+    image(rotatedBArrow, titleArrowX[0], titleArrowY[0] + screenY);      // X, Y coodination for the rotated black arrow image
+    image(rotatedWArrow, titleArrowX[1], titleArrowY[1] + screenY);      // X, Y coodination for the rotated white arrow image
+    image(rotatedBArrow, titleArrowX[2], titleArrowY[2] + screenY);      // X, Y coodination for the rotated black arrow image
+    image(rotatedWArrow, titleArrowX[3], titleArrowY[3] + screenY);      // X, Y coodination for the rotated white arrow image
 
-    image(rotatedBArrow, titleArrowX[0], titleArrowY[0] + screenY);
-    image(rotatedWArrow, titleArrowX[1], titleArrowY[1] + screenY);
-    image(rotatedBArrow, titleArrowX[2], titleArrowY[2] + screenY);
-    image(rotatedWArrow, titleArrowX[3], titleArrowY[3] + screenY);
+    if (titleArrowX[0] < rotatedArrowMin[0] || titleArrowX[0] > rotatedArrowMax[0]) {    // Condition for where the title arrows should run the code below
+      rotatedArrowSpeed[0] *= -1;                                                        // Multiplying the rotatedArrowSpeed[0] with -1 when it reaches one of the stated sides
+    }
+
+    if (titleArrowX[1] < rotatedArrowMin[1] || titleArrowX[1] > rotatedArrowMax[1]) {    // Condition for where the title arrows should run the code below
+      rotatedArrowSpeed[1] *= -1;                                                        // Multiplying the rotatedArrowSpeed[1] with -1 when it reaches one of the stated sides
+    }
+
+    if (titleArrowX[2] < rotatedArrowMin[2] || titleArrowX[2] > rotatedArrowMax[2]) {    // Condition for where the title arrows should run the code below
+      rotatedArrowSpeed[2] *= -1;                                                        // Multiplying the rotatedArrowSpeed[2] with -1 when it reaches one of the stated sides
+    }
+
+    if (titleArrowX[3] < rotatedArrowMin[3] || titleArrowX[3] > rotatedArrowMax[3]) {    // Condition for where the title arrows should run the code below
+      rotatedArrowSpeed[3] *= -1;                                                        // Multiplying the rotatedArrowSpeed[3] with -1 when it reaches one of the stated sides
+    }
+
 
     // Text and position for the "read more" titles, text and buttons
-    int readMoreX [] = {1400, 1100, 1460, 740};  
-    int readMoreY [] = {70, -110, -1620, -2300};           // Read more text X, Y position
-    int readMoreTX [] = {1290, 1100, 1460, 740}; 
-    int readMoreTY [] = {640, -110, -1620, -2300};         // Read more title X, Y position
-    int pictureX [] = {readMoreX[0], readMoreX[1], readMoreX[2], readMoreX[3]};
-    int pictureY [] = {readMoreY[0], readMoreY[1], readMoreY[2], readMoreY[3]};
+    int readMoreX [] = {1400, 1100, 1460, 740};                                                                             // Read more text X position
+    int readMoreY [] = {70, -110, -1620, -2300};                                                                            // Read more text Y position
+    int readMoreTX [] = {1290, 1100, 1460, 740};                                                                            // Read more title X position
+    int readMoreTY [] = {640, -110, -1620, -2300};                                                                          // Read more title Y position
+    int pictureX [] = {readMoreX[0], readMoreX[1], readMoreX[2], readMoreX[3]};                                             // picture X position relative to readmore X position
+    int pictureY [] = {readMoreY[0], readMoreY[1], readMoreY[2], readMoreY[3]};                                             // picture X position relative to readmore X position
 
-    int offSetX [] = {-10, 75, 150, 0};  
-    int offSetY [] = {280, 65, 90, 0};                     // Extra values for offsetting
+    int offSetX [] = {-10, 75, 150, 0};                                                                                     // Extra values for offsetting X
+    int offSetY [] = {280, 65, 90, 0};                                                                                      // Extra values for offsetting Y
 
     fill(normalTextColour);
     if (textHasBeenClicked[0]) {                                                                                            // Display the extended informative stuff
@@ -198,20 +217,18 @@ void draw() {
       text(ReadMore, readMoreTX[3], readMoreTY[3] + screenY);                                                               // Read more title for radiation
     }
 
-    if ( screenY < TopLimit ) {                                                                 // Condition set for when the arrow to dissapear
-      arrowY = arrowY + arrowSpeed;                                                             // Adding arrowSpeed into the variable arrowY
-      arrow.resize(60, 100);                                                                    // Resizing the image
-      image(arrow, arrowX, arrowY);                                                             // Loading the arrow image with X, Y coordinates
-      if ( arrowY < arrowTop || arrowY > arrowMin ) {                                           // Condition set for what the arrow should do when it reaches the required target
-        arrowSpeed *= -1;                                                                       // arrowSpeed gets incremented by -1 when the code is run
+    if ( screenY < TopLimit ) {                                                                                             // Condition set for when the arrow to dissapear
+      arrowY += arrowSpeed;                                                                                                 // Adding arrowSpeed into the variable arrowY
+      arrow.resize(60, 100);                                                                                                // Resizing the image
+      image(arrow, arrowX, arrowY);                                                                                         // Loading the arrow image with X, Y coordinates
+      if ( arrowY < arrowTop || arrowY > arrowMin ) {                                                                       // Condition set for what the arrow should do when it reaches the required target
+        arrowSpeed *= -1;                                                                                                   // arrowSpeed gets incremented by -1 when the code is run
       }
     }
   }
 
-  imageMode(CORNER);
+  imageMode(CORNER);                                                                                                        // Returning the image coordination to the defeault
 }
-
-
 
 // Event for what happens when the mouse wheel is scrolled
 void mouseWheel(MouseEvent event) {
@@ -233,30 +250,30 @@ void mouseWheel(MouseEvent event) {
 void mouseClicked() {  
   frontPage = false;
   if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY) {    // Hitbox criteria for 5G
-    textHasBeenClicked[0] = ! textHasBeenClicked[0];
-    textHasBeenClicked[1] = false;
-    textHasBeenClicked[2] = false;
-    textHasBeenClicked[3] = false;
+    textHasBeenClicked[0] = ! textHasBeenClicked[0];                                                                                                 // Turning textHasBeenClicked[0] on / off
+    textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT   
+    textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
+    textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
   }
 
   if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY) {    // Hitbox criteria for IoT
-    textHasBeenClicked[1] = ! textHasBeenClicked[1];
-    textHasBeenClicked[0] = false;
-    textHasBeenClicked[2] = false;
-    textHasBeenClicked[3] = false;
+    textHasBeenClicked[1] = ! textHasBeenClicked[1];                                                                                                 // Turning textHasBeenClicked[1] on / off
+    textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G
+    textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for conerns
+    textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
   }
 
   if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY) {    // Hitbox criteria for concerns
-    textHasBeenClicked[2] = ! textHasBeenClicked[2];
-    textHasBeenClicked[0] = false;
-    textHasBeenClicked[1] = false;
-    textHasBeenClicked[3] = false;
+    textHasBeenClicked[2] = ! textHasBeenClicked[2];                                                                                                 // Turning textHasBeenClicked[2] on / off
+    textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G
+    textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT
+    textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
   }
 
   if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY) {    // Hitbox criteria for radiation
-    textHasBeenClicked[3] = ! textHasBeenClicked[3];
-    textHasBeenClicked[0] = false;
-    textHasBeenClicked[1] = false;
-    textHasBeenClicked[2] = false;
+    textHasBeenClicked[3] = ! textHasBeenClicked[3];                                                                                                 // Turning textHasBeenClicked[3] on / off
+    textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G 
+    textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT
+    textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
   }
 }

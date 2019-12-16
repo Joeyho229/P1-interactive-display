@@ -43,11 +43,16 @@ int arrowMin = 120;                                       // Minimum limit for g
 boolean textHasBeenClicked [] = {false, false, false, false};
 boolean frontPage = true;
 
+int scrollingSpeed;
+
 float r = 320;
 float theta = 0;
 
 float titleArrowX [] = {1265, 1075, 1435, 715};           // Arrows pointing at "read more" X positions
 float titleArrowY [] = {632, -118, -1628, -2308};         // Arrows pointing at "read more" Y positions
+
+int rotatedArrowXSize = 40;
+int rotatedArrowYSize = 20;
 
 float rotatedArrowSpeed [] = {-0.5, -0.5, -0.5, -0.5};    // Arrows pointing at "read more" animation speed
 float rotatedArrowMax [] = {1265, 1075, 1435, 715};       // Arrows pointing at "read more" max limit
@@ -77,20 +82,9 @@ void setup() {
 void draw() {  
   if (frontPage == true) {                                           // If condition set for the frontpage
     image(frontPageImage, 0, 0);                                     // Frontpage image
-    float x = r * cos(theta);
-    float y = r * sin(theta);
-    transparency = 120;
-    noStroke();
-    fill(#FFFFFF, transparency);
-    ellipse(x + width/2.221, y + height/2.02, movingCircleR, movingCircleR);
-    theta += 0.04;
-
-    image(finger, 0, 0);                                             // Overlay finger
   } else if (frontPage == false) {
-    image(backgroundImage, 0, YstartingValue + screenY);             // The X, Y coordinates of the picture is set to 0, YstartingValue, thats beccause we want it to start from the buttom and then scroll up
-  }
-
-  println(mouseX, mouseY + screenY);                                 // Testing tools 
+    image(backgroundImage, 0, YstartingValue + screenY);             // The X, Y coordinates of the picture is set to 0, YstartingValue. -
+  }                                                                  // - thats beccause we want it to start from the buttom and then scroll up
 
   if (frontPage == false) {                                          // Condition for the text to appear when frontPage == false
     int titleDotX [] = {1122, 1263, 523, 903, 712};                  // Title dot X position
@@ -134,27 +128,27 @@ void draw() {
 
     // HitBoxes for each "read more" button
     transparency = 0;
-
+    noStroke();
     fill(0, transparency);
-    rect(hitBoxX[0], hitBoxY[0] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about 5G
-    rect(hitBoxX[1], hitBoxY[1] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about IoT
-    rect(hitBoxX[2], hitBoxY[2] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about concerns
-    rect(hitBoxX[3], hitBoxY[3] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about radiation
-    rect(hitBoxX[4], hitBoxY[4] + screenY, hitBoxSizeX, hitBoxSizeY);    // Hitbox square for read more about conclusion
+    rect(hitBoxX[0], hitBoxY[0] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about 5G
+    rect(hitBoxX[1], hitBoxY[1] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about IoT
+    rect(hitBoxX[2], hitBoxY[2] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about concerns
+    rect(hitBoxX[3], hitBoxY[3] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about radiation
+    rect(hitBoxX[4], hitBoxY[4] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about conclusion
 
-    imageMode(CENTER);                                                   // Setting image X, Y center point
-    rotatedWArrow.resize(40, 20);                                        // Resizing the picture for the rotated white arrow
-    rotatedBArrow.resize(40, 20);                                        // Resizing the picture for the rotated black arrow
+    imageMode(CENTER);                                                                   // Setting image X, Y center point
+    rotatedWArrow.resize(rotatedArrowXSize, rotatedArrowYSize);                          // Resizing the picture for the rotated white arrow
+    rotatedBArrow.resize(rotatedArrowXSize, rotatedArrowYSize);                          // Resizing the picture for the rotated black arrow
 
-    titleArrowX[0] += rotatedArrowSpeed[0];                              // Combining the titleArrowX[0] together with rotatedArrowSpeed[0]
-    titleArrowX[1] += rotatedArrowSpeed[1];                              // Combining the titleArrowX[1] together with rotatedArrowSpeed[1]
-    titleArrowX[2] += rotatedArrowSpeed[2];                              // Combining the titleArrowX[2] together with rotatedArrowSpeed[2]
-    titleArrowX[3] += rotatedArrowSpeed[3];                              // Combining the titleArrowX[3] together with rotatedArrowSpeed[3]
+    titleArrowX[0] += rotatedArrowSpeed[0];                                              // Combining the titleArrowX[0] together with rotatedArrowSpeed[0]
+    titleArrowX[1] += rotatedArrowSpeed[1];                                              // Combining the titleArrowX[1] together with rotatedArrowSpeed[1]
+    titleArrowX[2] += rotatedArrowSpeed[2];                                              // Combining the titleArrowX[2] together with rotatedArrowSpeed[2]
+    titleArrowX[3] += rotatedArrowSpeed[3];                                              // Combining the titleArrowX[3] together with rotatedArrowSpeed[3]
 
-    image(rotatedBArrow, titleArrowX[0], titleArrowY[0] + screenY);      // X, Y coodination for the rotated black arrow image
-    image(rotatedWArrow, titleArrowX[1], titleArrowY[1] + screenY);      // X, Y coodination for the rotated white arrow image
-    image(rotatedBArrow, titleArrowX[2], titleArrowY[2] + screenY);      // X, Y coodination for the rotated black arrow image
-    image(rotatedWArrow, titleArrowX[3], titleArrowY[3] + screenY);      // X, Y coodination for the rotated white arrow image
+    image(rotatedBArrow, titleArrowX[0], titleArrowY[0] + screenY);                      // X, Y coodination for the rotated black arrow image
+    image(rotatedWArrow, titleArrowX[1], titleArrowY[1] + screenY);                      // X, Y coodination for the rotated white arrow image
+    image(rotatedBArrow, titleArrowX[2], titleArrowY[2] + screenY);                      // X, Y coodination for the rotated black arrow image
+    image(rotatedWArrow, titleArrowX[3], titleArrowY[3] + screenY);                      // X, Y coodination for the rotated white arrow image
 
     if (titleArrowX[0] < rotatedArrowMin[0] || titleArrowX[0] > rotatedArrowMax[0]) {    // Condition for where the title arrows should run the code below
       rotatedArrowSpeed[0] *= -1;                                                        // Multiplying the rotatedArrowSpeed[0] with -1 when it reaches one of the stated sides
@@ -232,16 +226,16 @@ void draw() {
 
 // Event for what happens when the mouse wheel is scrolled
 void mouseWheel(MouseEvent event) {
+  scrollingSpeed = 24;                              // Scrolling speed
   if (frontPage == true) {
-  } else if (frontPage == false) {
-    float e = event.getCount();
-    screenY = screenY + int(e) * 24;    // Defining the value screenY with the event.getCount(), additionally it also increases the scroll speed
-    println(screenY);
-  }
+  } else if (frontPage == false) {                  // Things will only show if the frontPage == false
+    float e = event.getCount();                     // e variable that gets the value each time the mouseWheel scrolls either up or down
+    screenY = screenY + int(e) * scrollingSpeed;    // The Y position of the screen gets incremented with the variable e that forced into an integer, as it has to be same data type -
+  }                                                 // furthermore the value is mulitplied with the scrollingSpeed variable, as to make it scroll faster
 
-  if (screenY < BottomLimit) {          // Stating the boundaries for minimum scrolling point
+  if (screenY < BottomLimit) {                      // Stating the boundaries for minimum scrolling point
     screenY = BottomLimit;
-  } else if (screenY > TopLimit) {      // Stating the boundaries for maximum scrolling point
+  } else if (screenY > TopLimit) {                  // Stating the boundaries for maximum scrolling point
     screenY = TopLimit;
   }
 }

@@ -24,7 +24,7 @@ String TitleConclusion = "Opsumering om 5G";
 // Images
 PImage backgroundImage, frontPageImage, finger, cloud, cloud1, cloud2, thinking, arrow, rotatedWArrow, rotatedBArrow;
 
-int backgroundColour, screenY;  
+int backgroundColour, screenY;       
 int YstartingValue = -4248;                               // The starting Y-coordinate where to load the 2nd page
 int dotR = 10;                                            // Radius for small dot at every text start
 int spaceTextColour = #FFFFFF;                            // Colour for text that is in the space area
@@ -33,6 +33,7 @@ int transparency;                                         // Transparency toggle
 int movingCircleR = 25;                                   // Frontpage moving circle radius
 int TopLimit = 4014;                                      // Max scrolling height
 int BottomLimit = 0;                                      // Minimum scrolling height
+int scrollingSpeed;                                       // Scrolling speed variable used in mouseWheel section
 
 int arrowX = 78;                                          // Guidance arrow for scrolling X position
 int arrowY = 120;                                         // Guidance arrow for scrolling Y position
@@ -43,16 +44,11 @@ int arrowMin = 120;                                       // Minimum limit for g
 boolean textHasBeenClicked [] = {false, false, false, false};
 boolean frontPage = true;                                 // Boolean used for frontPage being active or inactive
 
-int scrollingSpeed;                                       // Scrolling speed variable used in mouseWheel section
-
-float r = 320;
-float theta = 0;
-
 float titleArrowX [] = {1265, 1075, 1435, 715};           // Arrows pointing at "read more" X positions
 float titleArrowY [] = {632, -118, -1628, -2308};         // Arrows pointing at "read more" Y positions
 
-int rotatedArrowXSize = 40;
-int rotatedArrowYSize = 20;
+int rotatedArrowXSize = 40;                               // Size of the rotated arrow on the x axis
+int rotatedArrowYSize = 20;                               // Size of the rotated arrow on the y axis
 
 float rotatedArrowSpeed [] = {-0.5, -0.5, -0.5, -0.5};    // Arrows pointing at "read more" animation speed
 float rotatedArrowMax [] = {1265, 1075, 1435, 715};       // Arrows pointing at "read more" max limit
@@ -96,8 +92,8 @@ void draw() {
     int textBoxSizeX [] = {500, 350, 300, 400, 600};                 // Text box sizes X value
     int textBoxSizeY [] = {980, -1520, -2020, 330, -3320};           // Text box sizes Y value
 
-    textSize(22);
-    fill(normalTextColour); 
+    textSize(22);                                                    // Text size
+    fill(normalTextColour);                                          // Text colour 
 
     // 5G 
     ellipse(titleDotX[0], titleDotY[0] + screenY, dotR, dotR);                                                // Dot for 5G

@@ -2,24 +2,24 @@
 
 // Read more text
 String ReadMore = "Læs mere...";
-String ReadMore5G = "Det næste trin i evolutionen for mobil netværksteknologi er 5G. Det vil revolutionere den måde mennesker og digitale enheder kommunikerer med hinanden. Den generelle internet hastighed kan nå op på 65 gange hurtigere end det vi oplever i dag. Latensen vil i takt med hastigheden blive betydelig bedre, og have en drastisk virkning på den tid det tager to enheder at kommunikere med hinanden. Kort sagt betyder det at du kan downloade en HD film på under 30 sekunder, og understøtte udviklingen af selvkørende biler.";
+String ReadMore5G = "Det næste trin i evolutionen for mobil netværksteknologi er 5G. Det vil revolutionere den måde mennesker og digitale enheder kommunikerer med hinanden. Den generelle internet hastighed kan nå op på 65 gange hurtigere end det vi oplever i dag. Latensen vil i takt med hastigheden blive betydelig lavere, og have en drastisk virkning på den tid det tager to enheder at kommunikere med hinanden. Kort sagt betyder det at du kan downloade en HD film på under 30 sekunder, og understøtte udviklingen af selvkørende biler.";
 String ReadMoreIoT = "Internet of Things forbinder mere end 7 milliarder enheder verden over og 1.5 millioner i Danmark alene. Det vil derfor gøre vores verden mere digital intelligent og befolkningens hverdag endnu nemmere end den er i dag, ved implementationen af 5G.";
 String ReadMoreConcerns = "Med nye teknologier opstår nye bekymringer, især når 4G allerede udsender stråling og 5G vil få strålingsniveauet til at stige. Dette har allerede fået mange til at spekulere om 5G er sikkert for mennesker. Mange mennesker er derfor allerede begyndt at udtrykke deres holdning og bekymring på Internettet.";
-String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G på omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, hvilket betyder at det således ikke kan interagere med kroppens atomer og molekyler. Det er derfor ikke skadelig for naturen og levende organismer. ";
+String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G på omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, hvilket betyder at det således ikke kan interagere med kroppens atomer og molekyler. Det er derfor ikke skadeligt for naturen og levende organismer. ";
 
 // Bullet point text
 String TextFor5G = "Hurtigere Internet\nEt mere forbundet samfund\nGavner digital kommunikation\nForbedret dæknings ydeevne";
 String TextForIoT = "Forbinde flere enheder sammen uafhængigt af hvor man befinder sig\nSkabe en nemmere hverdag\nEt forbundet samfund";
 String TextForConcerns = "Frygten for mere stråling\nBekymringer om overvågning\nSårbarhed overfor hackere";
 String TextForRadiation = "Er forøget stråling farligt?\nEr 5G farligt for samfundet?\nSkal 5G forbydes?";
-String TextForConclusion = "5G er en god mulighed for at bane bølgen for fremtiden og øge den eksponentielle udbredelse af cellulær kommunikation. Verden vil drage stor fordel af denne teknologi, men som de fleste ting følger den med tilknyttede negativer.Det er også op til dig at beslutte, om du vil omfavne den nye teknologi eller være imod den, men en ting er sikkert 5G vil snart være en del af danskernes hverdag.";
+String TextForConclusion = "5G er en god mulighed for at bane vejen for fremtiden og øge den eksponentielle udbredelse af cellulær kommunikation. Verden vil drage stor fordel af denne teknologi, men som de fleste ting følger den med tilknyttede negativer. Det er også op til dig at beslutte, om du vil omfavne den nye teknologi eller være imod den, men en ting er sikkert 5G vil snart være en del af danskernes hverdag.";
 
 // Titles
 String Title5G = "5G Den Nye Teknologi";
 String TitleIoT = "Internet of Things"; 
-String TitleConcerns = "Bekymringer Omkring 5G";
+String TitleConcerns = "Bekymringer Om 5G";
 String TitleRadiation = "Radioaktiv Stråling";
-String TitleConclusion = "Opsumering om 5G"; 
+String TitleConclusion = "Opsummering om 5G"; 
 
 // Images
 PImage backgroundImage, frontPageImage, finger, cloud, cloud1, cloud2, thinking, arrow, rotatedWArrow, rotatedBArrow;

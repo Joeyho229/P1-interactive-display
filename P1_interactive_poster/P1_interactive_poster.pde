@@ -242,32 +242,34 @@ void mouseWheel(MouseEvent event) {
 
 
 void mouseClicked() {  
+  if (frontPage == false) {
+    if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY) {    // Hitbox criteria for 5G
+      textHasBeenClicked[0] = ! textHasBeenClicked[0];                                                                                                 // Turning textHasBeenClicked[0] on / off
+      textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT   
+      textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
+      textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
+    }
+
+    if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY) {    // Hitbox criteria for IoT
+      textHasBeenClicked[1] = ! textHasBeenClicked[1];                                                                                                 // Turning textHasBeenClicked[1] on / off
+      textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G
+      textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for conerns
+      textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
+    }
+
+    if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY) {    // Hitbox criteria for concerns
+      textHasBeenClicked[2] = ! textHasBeenClicked[2];                                                                                                 // Turning textHasBeenClicked[2] on / off
+      textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G
+      textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT
+      textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
+    }
+
+    if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY) {    // Hitbox criteria for radiation
+      textHasBeenClicked[3] = ! textHasBeenClicked[3];                                                                                                 // Turning textHasBeenClicked[3] on / off
+      textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G 
+      textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT
+      textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
+    }
+  }
   frontPage = false;
-  if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY) {    // Hitbox criteria for 5G
-    textHasBeenClicked[0] = ! textHasBeenClicked[0];                                                                                                 // Turning textHasBeenClicked[0] on / off
-    textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT   
-    textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
-    textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
-  }
-
-  if (mouseX > hitBoxX[1] && mouseX < hitBoxX[1] + hitBoxSizeX && mouseY > hitBoxY[1] + screenY && mouseY < hitBoxY[1] + hitBoxSizeY + screenY) {    // Hitbox criteria for IoT
-    textHasBeenClicked[1] = ! textHasBeenClicked[1];                                                                                                 // Turning textHasBeenClicked[1] on / off
-    textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G
-    textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for conerns
-    textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
-  }
-
-  if (mouseX > hitBoxX[2] && mouseX < hitBoxX[2] + hitBoxSizeX && mouseY > hitBoxY[2] + screenY && mouseY < hitBoxY[2] + hitBoxSizeY + screenY) {    // Hitbox criteria for concerns
-    textHasBeenClicked[2] = ! textHasBeenClicked[2];                                                                                                 // Turning textHasBeenClicked[2] on / off
-    textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G
-    textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT
-    textHasBeenClicked[3] = false;                                                                                                                   // Disabling text for radiation
-  }
-
-  if (mouseX > hitBoxX[3] && mouseX < hitBoxX[3] + hitBoxSizeX && mouseY > hitBoxY[3] + screenY && mouseY < hitBoxY[3] + hitBoxSizeY + screenY) {    // Hitbox criteria for radiation
-    textHasBeenClicked[3] = ! textHasBeenClicked[3];                                                                                                 // Turning textHasBeenClicked[3] on / off
-    textHasBeenClicked[0] = false;                                                                                                                   // Disabling text for 5G 
-    textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT
-    textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
-  }
 }

@@ -2,17 +2,17 @@
 
 // Read more text
 String ReadMore = "Læs mere...";
-String ReadMore5G = "Det næste trin i evolutionen for mobil netværksteknologi er 5G, det vil revolutionere den måde mennesker og digitale enheder kommunikere med hinanden. Den generelle internet hastighed kan nå op på 65 gange hurtigere end det vi oplever i dag. Det er ikke hastigheden der ser betydelig forbedring, latency vil blive betydelig bedre, det er den tid det tager for to enheder at kommunikere med hinanden. Kort sagt betyder det at du kan downloade en HD film på under 30 sekunder, og vil køre selvkørende endnu mere intelligente.";
-String ReadMoreIoT = "Fordi Internet of Things forbinder mere end 7 milliarder enheder verden over og 1.5 millioner i danmark alene. Det vil derfor gøre vores verden mere digital intelligent og befolknings hverdag endnu nemmere end den er i dag, ved implementationen af 5G..";
+String ReadMore5G = "Det næste trin i evolutionen for mobil netværksteknologi er 5G. Det vil revolutionere den måde mennesker og digitale enheder kommunikerer med hinanden. Den generelle internet hastighed kan nå op på 65 gange hurtigere end det vi oplever i dag. Latensen vil i takt med hastigheden blive betydelig bedre, og have en drastisk virkning på den tid det tager to enheder at kommunikere med hinanden. Kort sagt betyder det at du kan downloade en HD film på under 30 sekunder, og understøtte udviklingen af selvkørende biler.";
+String ReadMoreIoT = "Internet of Things forbinder mere end 7 milliarder enheder verden over og 1.5 millioner i Danmark alene. Det vil derfor gøre vores verden mere digital intelligent og befolkningens hverdag endnu nemmere end den er i dag, ved implementationen af 5G.";
 String ReadMoreConcerns = "Med nye teknologier opstår nye bekymringer, især når 4G allerede udsender stråling og 5G vil få strålingsniveauet til at stige. Dette har allerede fået mange til at spekulere om 5G er sikkert for mennesker. Mange mennesker er derfor allerede begyndt at udtrykke deres holdning og bekymring på Internettet.";
-String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G, omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, det kan derfor ikke interagere med kroppens atomer og molekyler og er derfor ikke skadelig for naturen og levende organismer.";
+String ReadMoreRadiation = "Diskussionen om stråling er en stor del af korrektheden af implementationen af 5G, da 5G medbringer et højere strålingsniveau end 4G på omkring 25%. Strålingen fra 5G og 4G er ikke-ioniserende stråling, hvilket betyder at det således ikke kan interagere med kroppens atomer og molekyler. Det er derfor ikke skadelig for naturen og levende organismer. ";
 
 // Bullet point text
 String TextFor5G = "Hurtigere Internet\nEt mere forbundet samfund\nGavner digital kommunikation\nForbedret dæknings ydeevne";
-String TextForIoT = "Forbinde flere enheder sammen uafhængigt af hvor man befinder sig\nSkaber en nemmere hverdag\nEt forbundet samfund";
+String TextForIoT = "Forbinde flere enheder sammen uafhængigt af hvor man befinder sig\nSkabe en nemmere hverdag\nEt forbundet samfund";
 String TextForConcerns = "Frygten for mere stråling\nBekymringer om overvågning\nSårbarhed overfor hackere";
 String TextForRadiation = "Er forøget stråling farligt?\nEr 5G farligt for samfundet?\nSkal 5G forbydes?";
-String TextForConclusion = "5G er en god mulighed for at bane bølgen for fremtiden og øge den eksponentielle udbredelse af cellulær kommunikation. Verden vil drage stor fordel af denne teknologi, men som de fleste ting følger den med tilknyttede negativer. Det er også op til dig at beslutte, om du vil omfavne den nye teknologi eller være imod den, men en ting er sikkert 5G vil snart være en del af danskernes hverdag.";
+String TextForConclusion = "5G er en god mulighed for at bane bølgen for fremtiden og øge den eksponentielle udbredelse af cellulær kommunikation. Verden vil drage stor fordel af denne teknologi, men som de fleste ting følger den med tilknyttede negativer.Det er også op til dig at beslutte, om du vil omfavne den nye teknologi eller være imod den, men en ting er sikkert 5G vil snart være en del af danskernes hverdag.";
 
 // Titles
 String Title5G = "5G Den Nye Teknologi";
@@ -41,9 +41,9 @@ int arrowTop = 50;                                        // Top limit for guida
 int arrowMin = 120;                                       // Minimum limit for guidance arrow
 
 boolean textHasBeenClicked [] = {false, false, false, false};
-boolean frontPage = true;
+boolean frontPage = true;                                 // Boolean used for frontPage being active or inactive
 
-int scrollingSpeed;
+int scrollingSpeed;                                       // Scrolling speed variable used in mouseWheel section
 
 float r = 320;
 float theta = 0;
@@ -65,24 +65,24 @@ int hitBoxSizeY = 40;                                     // "Read more" hitbox 
 
 
 void setup() {
-  size(1920, 1080);
-  backgroundImage = loadImage("P1CityV3.png");
-  frontPageImage = loadImage("P1FrontPage.png");
-  finger = loadImage("P1FrontPageFinger.png");
-  cloud = loadImage("cloud.png");
-  cloud1 = loadImage("cloud1.png");
-  cloud2 = loadImage("cloud2.png");
-  thinking = loadImage("thinking.png");
-  arrow = loadImage("Arrow.png");
-  rotatedWArrow = loadImage("rotatedWArrow.png");
-  rotatedBArrow = loadImage("rotatedBArrow.png");
+  size(1920, 1080);                                       // Canvas sizes set to full HD screen
+  backgroundImage = loadImage("P1CityV3.png");            // Background image
+  frontPageImage = loadImage("P1FrontPage.png");          // Front page image
+  finger = loadImage("P1FrontPageFinger.png");            // Finger image
+  cloud = loadImage("cloud.png");                         // First expandable cloud
+  cloud1 = loadImage("cloud1.png");                       // Second expandable cloud
+  cloud2 = loadImage("cloud2.png");                       // Third expandable cloud 
+  thinking = loadImage("thinking.png");                   // Expandable thinking box
+  arrow = loadImage("Arrow.png");                         // Arrow
+  rotatedWArrow = loadImage("rotatedWArrow.png");         // Rotated white arrow
+  rotatedBArrow = loadImage("rotatedBArrow.png");         // Rotated black arrow
 }
 
-
 void draw() {  
+  imageMode(CORNER);                                                 // Defining the image to load its X, Y coordinates from the cornor
   if (frontPage == true) {                                           // If condition set for the frontpage
     image(frontPageImage, 0, 0);                                     // Frontpage image
-  } else if (frontPage == false) {
+  } else if (frontPage == false) {                                   // What happens if the condition frontPage == false is met
     image(backgroundImage, 0, YstartingValue + screenY);             // The X, Y coordinates of the picture is set to 0, YstartingValue. -
   }                                                                  // - thats beccause we want it to start from the buttom and then scroll up
 
@@ -127,9 +127,9 @@ void draw() {
 
 
     // HitBoxes for each "read more" button
-    transparency = 0;
-    noStroke();
-    fill(0, transparency);
+    transparency = 0;                                                                    // Setting the transparency value to 0
+    noStroke();                                                                          // Defining the strokes to be invisible
+    fill(0, transparency);                                                               // Defining the fill values for each hitbox
     rect(hitBoxX[0], hitBoxY[0] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about 5G
     rect(hitBoxX[1], hitBoxY[1] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about IoT
     rect(hitBoxX[2], hitBoxY[2] + screenY, hitBoxSizeX, hitBoxSizeY);                    // Hitbox square for read more about concerns
@@ -178,7 +178,7 @@ void draw() {
     int offSetX [] = {-10, 75, 150, 0};                                                                                     // Extra values for offsetting X
     int offSetY [] = {280, 65, 90, 0};                                                                                      // Extra values for offsetting Y
 
-    fill(normalTextColour);
+    fill(normalTextColour);                                                                                                 // Colour for the displayed text
     if (textHasBeenClicked[0]) {                                                                                            // Display the extended informative stuff
       thinking.resize(750, 750);                                                                                            // Thinking image size
       image(thinking, pictureX[0] + textBoxSizeX[0]/2, pictureY[0] + offSetY[0] + screenY);                                 // Thinking image position
@@ -220,8 +220,6 @@ void draw() {
       }
     }
   }
-
-  imageMode(CORNER);                                                                                                        // Returning the image coordination to the defeault
 }
 
 // Event for what happens when the mouse wheel is scrolled
@@ -243,7 +241,8 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked() {  
   if (frontPage == false) {
-    if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX && mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY) {    // Hitbox criteria for 5G
+    if (mouseX > hitBoxX[0] && mouseX < hitBoxX[0] + hitBoxSizeX &&
+      mouseY > hitBoxY[0] + screenY && mouseY < hitBoxY[0] + hitBoxSizeY + screenY) {    // Hitbox criteria for 5G
       textHasBeenClicked[0] = ! textHasBeenClicked[0];                                                                                                 // Turning textHasBeenClicked[0] on / off
       textHasBeenClicked[1] = false;                                                                                                                   // Disabling text for IoT   
       textHasBeenClicked[2] = false;                                                                                                                   // Disabling text for concerns
